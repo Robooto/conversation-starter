@@ -1,0 +1,9 @@
+version: "3.4"
+services:
+  api:
+    build: api
+    entrypoint: '/start-reload.sh'
+    ports:
+        - 8080:80
+    volumes:
+        - ./api:/app
