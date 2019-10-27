@@ -15,18 +15,18 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld/>
+      <Conversations/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Conversations from './components/Conversations';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Conversations,
   },
   data: () => ({
     //

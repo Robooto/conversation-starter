@@ -13,14 +13,17 @@
         mb-5
         xs12
       >
-        <h2 class="headline font-weight-bold mb-3">What's next?</h2>
+        <v-btn color="primary" @click="roulette" class="mb-4">Roulette</v-btn>
 
 
             <v-card
               class="mx-auto"
               max-width="600"
+              min-height="75"
             >
-              <v-list-item-title class="pt-6 pb-6">{{starter}}</v-list-item-title>
+              <v-list-item-title class="pt-6 pb-6">
+                {{starter}}
+              </v-list-item-title>
             </v-card>
       </v-flex>
 
@@ -50,7 +53,7 @@ import { dataService } from '../shared'
 export default {
   data: () => ({
     topics: [],
-    starter: '',
+    starter: 'Click a topic or smash the roulette button!',
   }),
   async created() {
     await this.loadTopics();
@@ -61,6 +64,9 @@ export default {
     },
     async loadTopics() {
       this.topics = await dataService.getTopics().catch(console.log);
+    },
+    async roulette() {
+      this.starter = await dataService.getRandom().catch(console.log);
     }
   }
 };
