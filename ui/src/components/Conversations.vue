@@ -18,7 +18,8 @@
 
             <v-card
               class="mx-auto"
-              max-width="600"
+              max-width="800"
+              min-width="700"
               min-height="75"
             >
               <v-list-item-title class="pt-6 pb-6">
