@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.models.topics import Topic
+from app.models import Topic
 
 router = APIRouter()
 

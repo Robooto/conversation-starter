@@ -2,8 +2,8 @@ import random
 
 from fastapi import APIRouter
 
-from app.db.init_db import conversation_list_db
-from app.models.topics import Topic
+from app.database import conversation_list_db
+from app.models import Topic
 
 router = APIRouter()
 

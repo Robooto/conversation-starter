@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from app.routes.api import api_router
+from app.routes.v1 import api_router
 
 app = FastAPI(title="Conversations")
 origins = [
