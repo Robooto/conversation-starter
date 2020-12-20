@@ -1,7 +1,10 @@
 from sqlalchemy import func
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app import models, schemas
+from app.database import SessionLocal
+from app.questions import conversation_list_db
 
 
 def get_topics(db: Session, skip: int = 0, limit: int = 100):
@@ -39,3 +42,16 @@ def get_random_question_by_topic(db: Session, topic_id: int):
 
 def get_random_question(db: Session):
     return db.query(models.Questions).order_by(func.random()).first()
+
+
+def seed_db():
+    db = SessionLocal()
+    try:
+        for topic in conversation_list_db:
+            db_topic = create_topic(db, topic=schemas.TopicCreate(topic=topic))
+            for question in conversation_list_db[topic]:
+                create_question(db, schemas.Question(question=question, topic_id=db_topic.id), topic=topic)
+        db.close()
+    except IntegrityError:
+        db.close()
+        print('db already seeded')
