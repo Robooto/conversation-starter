@@ -9,12 +9,9 @@ from app.routes.v2 import api_router as v2_api_router
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Conversations")
-origins = [
-    "http://localhost:8887",
-]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
