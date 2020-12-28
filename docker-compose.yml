@@ -4,10 +4,10 @@ services:
     build: api
     entrypoint: '/start-reload.sh'
     ports:
-        - 4000:80
+        - 8886:80
     volumes:
         - ./api:/app
   ui:
     build: ui
     ports:
-      - 8080:80
+      - 8887:80

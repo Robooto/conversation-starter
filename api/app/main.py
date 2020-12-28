@@ -10,7 +10,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Conversations")
 origins = [
-    "http://localhost:8080",
+    "http://localhost:8887",
 ]
 app.add_middleware(
     CORSMiddleware,

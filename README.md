@@ -4,11 +4,11 @@ Conversations can be hard but probably shouldn't be but everyone needs a few ide
 ## Running the app
 
 ```bash
-docker-compose up --build
+docker-compose up --build --detach
 ```
-UI - http://localhost:8080
+UI - http://localhost:8887
 
-API - http://localhost:4000/docs
+API - http://localhost:8886/docs
 
 ## backend
 Python api using fastapi
