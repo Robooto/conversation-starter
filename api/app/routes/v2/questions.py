@@ -21,9 +21,9 @@ async def get_random_question(db: Session = Depends(get_db)):
 
 
 @router.get("/{topic}")
-async def get_random_question_by_topic(topic: str, db: Session = Depends(get_db)):
+async def get_questions_by_topic(topic: str, roulette: bool, db: Session = Depends(get_db)):
     db_topic = crud.get_topic(db, topic=topic)
     if not db_topic:
         raise HTTPException(status_code=400, detail="Topic does not exist")
 
-    return crud.get_random_question_by_topic(db, topic_id=db_topic.id)
+    return crud.get_questions_by_topic(db, topic_id=db_topic.id, roulette=roulette)

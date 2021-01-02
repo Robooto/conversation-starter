@@ -36,8 +36,13 @@ def create_question(db: Session, question: schemas.Question, topic: str):
     return db_question
 
 
-def get_random_question_by_topic(db: Session, topic_id: int):
-    return db.query(models.Questions).filter(models.Questions.topic_id == topic_id).order_by(func.random()).first()
+def get_questions_by_topic(db: Session, topic_id: int, roulette: bool):
+    query = db.query(models.Questions).filter(models.Questions.topic_id == topic_id)
+
+    if roulette:
+        return query.order_by(func.random()).first()
+
+    return query.all()
 
 
 def get_random_question(db: Session):
