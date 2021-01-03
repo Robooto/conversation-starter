@@ -23,7 +23,7 @@
               min-height="75"
             >
               <v-list-item-title class="pt-6 pb-6">
-                {{starter}}
+                {{starter.question}}
               </v-list-item-title>
             </v-card>
       </v-flex>
@@ -39,9 +39,9 @@
             v-for="(topic, i) in topics"
             :key="i"
             class="subheading mx-3"
-            @click="topicClick(topic)"
+            @click="topicClick(topic.topic)"
           >
-            {{ topic }}
+            {{ topic.topic }}
           </a>
         </v-layout>
       </v-flex>
@@ -54,7 +54,7 @@ import { dataService } from '../shared'
 export default {
   data: () => ({
     topics: [],
-    starter: 'Click a topic or smash the roulette button!',
+    starter: { question: 'Click a topic or smash the roulette button!'},
   }),
   async created() {
     await this.loadTopics();

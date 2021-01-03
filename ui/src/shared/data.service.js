@@ -12,7 +12,7 @@ const getTopics = async () => {
 
 const getStarter = async (topic) => {
     try {
-        const response = await axios.get(`${API}/starters/${topic}`);
+        const response = await axios.get(`${API}/questions/${topic}?roulette=true`);
         return response.data;
     } catch (error) {
         throw new Error(error);
@@ -21,7 +21,7 @@ const getStarter = async (topic) => {
 
 const getRandom = async () => {
     try {
-        const response = await axios.get(`${API}/starters/roulette`);
+        const response = await axios.get(`${API}/questions/roulette`);
         return response.data;
     } catch (error) {
         throw new Error(error);

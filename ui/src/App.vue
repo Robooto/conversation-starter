@@ -14,9 +14,9 @@
       </v-btn>
     </v-app-bar>
 
-    <v-content>
+    <v-main>
       <Conversations/>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

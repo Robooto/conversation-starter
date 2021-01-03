@@ -8,7 +8,7 @@ from app.questions import conversation_list_db
 
 
 def get_topics(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Topics).offset(skip).limit(limit).all()
+    return db.query(models.Topics).order_by(models.Topics.topic).offset(skip).limit(limit).all()
 
 
 def get_topic(db: Session, topic: str):
