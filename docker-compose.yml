@@ -2,11 +2,13 @@ version: "3.4"
 services:
   api:
     build: api
+    restart: unless-stopped
     ports:
         - 8886:80
     volumes:
         - ./api:/app
   ui:
     build: ui
+    restart: unless-stopped
     ports:
       - 8887:80
