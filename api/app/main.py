@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
@@ -7,7 +9,13 @@ from app.routes.v1 import api_router
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Conversations")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    crud.seed_db()
+    yield
+
+
+app = FastAPI(title="Conversations", lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,9 +24,3 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(api_router, prefix="/api/v1")
-
-
-@app.on_event("startup")
-async def startup_event():
-    print('on starting up')
-    crud.seed_db()
