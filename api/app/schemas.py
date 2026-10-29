@@ -1,13 +1,12 @@
-from typing import List, Optional
-from pydantic import BaseModel
+from typing import List
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Question(BaseModel):
     question: str
     topic_id: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class TopicBase(BaseModel):
@@ -19,7 +18,6 @@ class TopicCreate(TopicBase):
 
 
 class Topic(TopicBase):
-    questions: List[Question] = []
+    questions: List[Question] = Field(default_factory=list)
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

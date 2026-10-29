@@ -1,0 +1,25 @@
+name: Container security and API compatibility
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  containers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Build API with patched OS packages
+        run: docker build --pull --tag conversations-api-ci ./api
+      - name: Test existing SQLite schema and API behavior on Python 3.12
+        run: >-
+          docker run --rm --entrypoint sh
+          --volume "$PWD/api/tests:/app/tests:ro"
+          conversations-api-ci -c
+          'pip install --no-cache-dir httpx==0.28.1 && python -m unittest discover -s tests -v'
+      - name: Build static UI using patched Node
+        run: docker build --pull --tag conversations-ui-ci ./ui
+      - name: Validate runtime Nginx configuration
+        run: docker run --rm --network none conversations-ui-ci nginx -t
